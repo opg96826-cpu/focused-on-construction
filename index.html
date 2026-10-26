@@ -42,9 +42,12 @@
   .nav-links a{text-decoration:none;opacity:.85}
   .nav-links a:hover{opacity:1;color:var(--terra)}
   .nav-cta{background:var(--terra);color:#fff;padding:10px 22px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+  .nav-cta2{border:2px solid rgba(240,233,223,.55);color:#f0e9df;padding:9px 20px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
   /* hero */
   .hero{position:relative;min-height:100svh;min-height:100vh;display:flex;align-items:flex-end;color:#fff;background:#1a1511 url("assets-foc/hero.jpg") center/cover no-repeat}
-  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:heroDrift 30s ease-in-out infinite alternate}
+  @keyframes heroDrift{from{transform:scale(1)}to{transform:scale(1.06)}}
+  @media (prefers-reduced-motion:reduce){.hero-media{animation:none}}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,21,17,.55) 0%,rgba(26,21,17,.3) 45%,rgba(26,21,17,.94) 100%)}
   .hero-in{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;padding:140px 24px 64px}
   .hero-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,233,223,.85);font-weight:700;margin-bottom:18px}
@@ -105,6 +108,7 @@
   .build-sticky{position:sticky;top:0;height:100svh;height:100vh;overflow:hidden;color:#fff}
   .build-sticky .stage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
   .build-sticky .stage.on{opacity:1}
+  #stageTitle,#stageText{transition:opacity .45s ease}
   .build-sticky::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,21,17,.55) 0%,rgba(26,21,17,0) 30%,rgba(26,21,17,0) 60%,rgba(26,21,17,.9) 100%)}
   .build-ui{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:0 24px 44px}
   .build-ui-in{max-width:1180px;margin:0 auto}
@@ -123,7 +127,9 @@
   .day-phase{font-family:"Arial Narrow","Liberation Sans Narrow",Arial,sans-serif;text-transform:uppercase;font-size:clamp(40px,5vw,64px);line-height:1;color:#fff;transition:opacity 2s ease}
   .day-time{font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--terra);font-weight:800;margin-top:6px;transition:opacity 2s ease}
   .day-visual{position:relative;border-radius:12px;overflow:hidden;background:#222}
-  .day-visual img{width:100%;aspect-ratio:16/10;object-fit:cover}
+  .day-visual{aspect-ratio:16/10}
+  .day-visual .day-stage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2s ease}
+  .day-visual .day-stage.on{opacity:1}
   .day-tint{position:absolute;inset:0;opacity:0;transition:opacity 2s ease;pointer-events:none}
   .day-tint.morning{background:linear-gradient(180deg,rgba(255,190,90,.30),rgba(255,150,60,.12))}
   .day-tint.afternoon{background:linear-gradient(180deg,rgba(255,140,50,.34),rgba(255,110,40,.14))}
@@ -211,14 +217,12 @@
       <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
     </div>
-    <a class="nav-cta" href="contact.html">Request dossier &rarr;</a>
+    <a class="nav-cta" href="contact.html">Request a consultation</a><a class="nav-cta2" href="contact.html">Request dossier &rarr;</a>
   </div>
 </nav>
 
 <header class="hero" id="top">
-  <video autoplay muted loop playsinline preload="auto" poster="assets-foc/hero.jpg">
-    <source src="assets-foc/hero-video.mp4" type="video/mp4">
-  </video>
+  <img class="hero-media" src="assets-foc/hero.jpg" alt="Construction site at first light">
   <div class="hero-in">
     <div class="hero-meta"><span>Est. 1978</span><span>Hinckley, United Kingdom</span></div>
     <h1>One firm.<br><span class="serif">One standard.</span></h1>
@@ -386,7 +390,7 @@
     <img class="stage on" src="assets-foc/stage1.jpg" alt="Stage 1 — foundation and groundwork">
     <img class="stage" src="assets-foc/stage2.jpg" alt="Stage 2 — concrete frame rising">
     <img class="stage" src="assets-foc/stage3.jpg" alt="Stage 3 — floor works and fit-out">
-    <img class="stage" src="assets-foc/stage4.jpg" alt="Stage 4 — completed tower">
+    <img class="stage" src="assets-foc/highrise.jpg" alt="Stage 4 — one completed tower">
     <div class="build-ui">
       <div class="build-ui-in">
         <div class="kicker">Interactive &middot; Scroll to build</div>
@@ -406,15 +410,18 @@
       <div class="reveal">
         <div class="sec-num">05 &mdash; Interactive &middot; Read the day</div>
         <h2 style="margin-top:12px;color:#fff">Read the day <span class="it">before you build.</span></h2>
-        <p class="lead">Drag the slider and watch the site move through the day — morning light on the frame, midday clarity, afternoon heat, evening shutdown. Every phase changes how a site works, so we plan for all four.</p>
+        <p class="lead">Drag the slider and watch one tower rise through the day — foundations at first light, the frame by midday, fit-out in the afternoon, complete by evening. Every phase changes how a site works, so we plan for all four.</p>
         <div class="day-readout">
           <div class="day-phase" id="dayPhase">Midday</div>
-          <div class="day-time" id="dayTime">12:00 &middot; Full light, full crew</div>
+          <div class="day-time" id="dayTime">12:00 &middot; Full light — the frame rises</div>
         </div>
       </div>
       <div class="reveal">
         <div class="day-visual">
-          <img src="assets-foc/highrise.jpg" alt="High-rise building through the day">
+          <img class="day-stage" src="assets-foc/stage1.jpg" alt="Stage 1 — foundations at first light">
+          <img class="day-stage on" src="assets-foc/stage2.jpg" alt="Stage 2 — frame rising at midday">
+          <img class="day-stage" src="assets-foc/stage3.jpg" alt="Stage 3 — fit-out in the afternoon">
+          <img class="day-stage" src="assets-foc/highrise.jpg" alt="Stage 4 — one completed tower by evening">
           <div class="day-tint morning" id="tintMorning"></div>
           <div class="day-tint afternoon" id="tintAfternoon"></div>
           <div class="day-tint evening" id="tintEvening"></div>
@@ -427,8 +434,8 @@
         </div>
         <div class="day-ticks"><span>06:00</span><span>12:00</span><span>17:00</span><span>21:00</span></div>
         <input class="day-range" type="range" id="dayRange" min="0" max="100" value="50" aria-label="Time of day">
-        <p class="day-note">Drag the slider — the sun, the light and the site ease into each new phase over two seconds.</p>
-        <noscript><p class="day-note">Shown at midday: full light, full crew.</p></noscript>
+        <p class="day-note">Drag the slider — the sun, the light and the building ease into each new phase over two seconds.</p>
+        <noscript><p class="day-note">Shown at midday: the frame rises.</p></noscript>
       </div>
     </div>
   </div>
@@ -609,9 +616,10 @@
     { t: "Stage 1 \u2014 Foundation & Groundwork", d: "Piling, excavation and the concrete core take shape. Every tower we build starts exactly here." },
     { t: "Stage 2 \u2014 Steel & Concrete Frame", d: "Floor by floor, the skeleton of the tower rises — columns, cores and decks going up on programme." },
     { t: "Stage 3 \u2014 Floors, Workers & Fit-Out", d: "Crews work every deck as the building climbs — structure, services and facades moving together." },
-    { t: "Stage 4 \u2014 The Completed Tower", d: "Glass, cladding and handover. A landmark delivered, ready for the people who will use it every day." }
+    { t: "Stage 4 \u2014 One Completed Tower", d: "Glass, cladding and handover. One landmark delivered, ready for the people who will use it every day." }
   ];
   var current = 0;
+  var textTimer = null;
   function updateStages() {
     var rect = section.getBoundingClientRect();
     var total = section.offsetHeight - window.innerHeight;
@@ -624,8 +632,15 @@
       dots[current].classList.remove("on");
       stages[index].classList.add("on");
       dots[index].classList.add("on");
-      titleEl.textContent = stageData[index].t;
-      textEl.textContent = stageData[index].d;
+      titleEl.style.opacity = "0";
+      textEl.style.opacity = "0";
+      if (textTimer) clearTimeout(textTimer);
+      textTimer = setTimeout(function () {
+        titleEl.textContent = stageData[index].t;
+        textEl.textContent = stageData[index].d;
+        titleEl.style.opacity = "1";
+        textEl.style.opacity = "1";
+      }, 200);
       current = index;
     }
   }
@@ -642,6 +657,7 @@
 
   /* ---------- READ THE DAY: day-phase slider (2s eased transitions) ---------- */
   var dayRange = document.getElementById("dayRange");
+  var dayStages = document.querySelectorAll(".day-stage");
   var daySun = document.getElementById("daySun");
   var dayPhase = document.getElementById("dayPhase");
   var dayTime = document.getElementById("dayTime");
@@ -665,13 +681,15 @@
     tintM.classList.toggle("on", t < 0.25);
     tintA.classList.toggle("on", t >= 0.5 && t < 0.75);
     tintE.classList.toggle("on", t >= 0.75);
+    var sIdx = t < 0.25 ? 0 : t < 0.5 ? 1 : t < 0.75 ? 2 : 3;
+    for (var i = 0; i < dayStages.length; i++) dayStages[i].classList.toggle("on", i === sIdx);
     /* phase + clock: 360..1260 minutes (06:00..21:00) */
     var mins = 360 + t * 900;
     var phase, note;
-    if (t < 0.25) { phase = "Morning"; note = "First light, first crews on site"; }
-    else if (t < 0.5) { phase = "Midday"; note = "Full light, full crew"; }
-    else if (t < 0.75) { phase = "Afternoon"; note = "Heat, dust and heavy lifts"; }
-    else { phase = "Evening"; note = "Shutdown, securing the site"; }
+    if (t < 0.25) { phase = "Morning"; note = "First light — foundations and groundwork"; }
+    else if (t < 0.5) { phase = "Midday"; note = "Full light — the frame rises"; }
+    else if (t < 0.75) { phase = "Afternoon"; note = "Heat, dust and heavy lifts — fit-out under way"; }
+    else { phase = "Evening"; note = "Shutdown — one tower, complete"; }
     var label = fmtTime(mins) + " \u00b7 " + note;
     if (dayPhase.textContent !== phase) {
       dayPhase.style.opacity = "0";
