@@ -45,9 +45,7 @@
   .nav-cta2{border:2px solid rgba(240,233,223,.55);color:#f0e9df;padding:9px 20px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
   /* hero */
   .hero{position:relative;min-height:100svh;min-height:100vh;display:flex;align-items:flex-end;color:#fff;background:#1a1511 url("assets-foc/hero.jpg") center/cover no-repeat}
-  .hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:heroDrift 30s ease-in-out infinite alternate}
-  @keyframes heroDrift{from{transform:scale(1)}to{transform:scale(1.06)}}
-  @media (prefers-reduced-motion:reduce){.hero-media{animation:none}}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,21,17,.55) 0%,rgba(26,21,17,.3) 45%,rgba(26,21,17,.94) 100%)}
   .hero-in{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;padding:140px 24px 64px}
   .hero-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,233,223,.85);font-weight:700;margin-bottom:18px}
@@ -222,7 +220,9 @@
 </nav>
 
 <header class="hero" id="top">
-  <img class="hero-media" src="assets-foc/hero.jpg" alt="Construction site at first light">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets-foc/hero.jpg">
+    <source src="assets-foc/hero-video-smooth.mp4" type="video/mp4">
+  </video>
   <div class="hero-in">
     <div class="hero-meta"><span>Est. 1978</span><span>Hinckley, United Kingdom</span></div>
     <h1>One firm.<br><span class="serif">One standard.</span></h1>
